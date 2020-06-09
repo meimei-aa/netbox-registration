@@ -1,0 +1,20 @@
+---
+- name: read csv
+  read_csv:
+    path: "{{ device_csv }}"
+    key: name
+  register: devices
+  delegate_to: localhost
+
+# add interface to device
+- name: add management interfaces
+  netbox_device_interface:
+    netbox_url: "{{ netbox_url }}"
+    netbox_token: "{{ netbox_token }}"
+    data:
+      device: "{{ item.value.name }}"
+      name: "{{ item.value.management_interface }}"
+  loop: "{{ devices.dict|dict2items }}"
+  # collection module
+  collections:
+  - fragmentedpacket.netbox_modules

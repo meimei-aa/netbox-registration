@@ -1,0 +1,12 @@
+---
+# List of Device Types
+device_types:
+  - model: Catalyst2960
+    slug: Catalyst2960
+    manufacturer: Cisco
+  - model: Catalyst3850
+    slug: Catalyst3850
+    manufacturer: Cisco
+  - model: VDX6740
+    slug: VDX6740
+    manufacturer: Brocade

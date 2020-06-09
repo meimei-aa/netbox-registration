@@ -1,0 +1,44 @@
+---
+- hosts: netbox
+  connection: local
+  gather_facts: no
+
+  vars:
+    # Default CSV file for Device registration
+    device_csv: files/sample.csv
+
+  # Read object definition files
+  vars_files:
+    - object_vars/site.yml
+    - object_vars/manufacturer.yml
+    - object_vars/device_role.yml
+    - object_vars/device_type.yml
+
+  roles:
+    - role: site
+      tags: site
+    - role: manufacturer
+      tags:
+        - manufacturer
+    - role: device_role
+      tags:
+        - device_role
+    - role: device_type
+      tags:
+        - device_type
+    - role: device
+      tags:
+        - device
+        - device_only
+    - role: device_interface
+      tags:
+        - device
+        - device_interface
+    - role: ip_address
+      tags:
+        - device
+        - ipam
+    - role: device_primary_ip
+      tags:
+        - device
+        - ipam

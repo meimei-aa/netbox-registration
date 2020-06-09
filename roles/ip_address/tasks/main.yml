@@ -1,0 +1,19 @@
+---
+- name: read csv
+  read_csv:
+    path: "{{ device_csv }}"
+    key: name
+  register: devices
+  delegate_to: localhost
+
+# Assign Primary IP to device management interface as Management IP
+- name: assign ip addresses
+  netbox_ip_address:
+    netbox_url: "{{ netbox_url }}"
+    netbox_token: "{{ netbox_token }}"
+    data:
+      interface:
+        device: "{{ item.value.name }}"
+        name: "{{ item.value.management_interface }}"
+      address: "{{ item.value.primary_ip4 }}"
+  loop: "{{ devices.dict|dict2items }}"

@@ -1,0 +1,9 @@
+---
+# List of Device Roles
+device_roles:
+  - name: Core
+    slug: core
+    color: ff5722
+  - name: Edge
+    slug: edge
+    color: ff9800

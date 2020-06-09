@@ -1,0 +1,14 @@
+---
+# add device type
+- name: add device types
+  netbox_device_type:
+    netbox_url: "{{ netbox_url }}"
+    netbox_token: "{{ netbox_token }}"
+    data:
+      model: "{{ item.model }}"
+      slug: "{{ item.slug }}"
+      manufacturer: "{{ item.manufacturer }}"
+  loop: "{{ device_types }}"
+  # collection module
+  collections:
+  - fragmentedpacket.netbox_modules
